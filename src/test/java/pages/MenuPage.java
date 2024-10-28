@@ -1,7 +1,10 @@
 package pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import com.aventstack.extentreports.ExtentTest;
 
@@ -26,16 +29,21 @@ public class MenuPage extends BaseClass{
 		return this;
 	}
 	
-//
-//	public SalesPage clickOnSales() { 
-//		oWrap.click(driver.findElement(salesLink), "Sales Link");
-//		return new SalesPage(driver,node); 
-//	}
+
+	public SalesPage clickOnSales() { 
+		Actions actions = new Actions(driver);
+		actions.moveToElement(driver.findElement(salesLink))
+			   .pause(Duration.ofSeconds(2))
+			   .click()
+			   .perform();
+		//driver.findElement(salesLink).click();
+		return new SalesPage(); 
+	}
 	
-//	public MenuPage clickOnViewAll() {
-//		oWrap.click(driver.findElement(viewAllLink), "viewAll Link");
-//		return this;
-//	}
+	public MenuPage clickOnViewAll() {
+		driver.findElement(viewAllLink).click();
+		return this;
+	}
 	
 	public MenuPage clickUserImg()   {
 		try {
