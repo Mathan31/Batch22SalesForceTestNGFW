@@ -17,6 +17,11 @@ public class MenuPage extends BaseClass{
 	protected By salesLink = By.xpath("//span[@part='formatted-rich-text']/p[text()='Sales']");
 	protected By logoutLink = By.xpath("//a[text()='Log Out']");
 	protected By userImg=By.xpath("(//span[@class='uiImage']/parent::div[@data-aura-class='forceEntityIcon'])[1]");
+	private WebDriver driver;
+	
+	public MenuPage(WebDriver driver) {
+		this.driver = driver;
+	}
 	
 	public MenuPage clickOnAppLauncher() {
 		driver.findElement(applauncherIcon).click();
@@ -37,7 +42,7 @@ public class MenuPage extends BaseClass{
 			   .click()
 			   .perform();
 		//driver.findElement(salesLink).click();
-		return new SalesPage(); 
+		return new SalesPage(driver); 
 	}
 	
 	public MenuPage clickOnViewAll() {
@@ -64,7 +69,7 @@ public class MenuPage extends BaseClass{
 			e.printStackTrace();
 		}
 		driver.findElement(logoutLink).click();
-		return new LoginPage();
+		return new LoginPage(driver);
 	}
 
 }

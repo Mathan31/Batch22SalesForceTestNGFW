@@ -21,7 +21,12 @@ public class SalesPage extends MenuPage{
 	private By statusTxt=By.xpath("//span[@title='Working - Contacted']");
 	private By savebtn=By.xpath("//button[@name='SaveEdit']");
 	private By noOfEmployee = By.xpath("//input[@name='NumberOfEmployees']");
+	private WebDriver driver;
 	
+	public SalesPage(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+	}
 	
 	public SalesPage clickOnLeadsLink() {
 		Actions actions = new Actions(driver);

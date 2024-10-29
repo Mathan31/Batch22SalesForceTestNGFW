@@ -8,16 +8,19 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 
+import utilities.DataProviderObject;
 import utilities.PropertyFileUtil;
 
 public class BaseClass {
 	
 
-	public static WebDriver driver;//null
+	public WebDriver driver;//null
 	public String propFileName = "Environment";
 	public  int browser = Integer.parseInt(PropertyFileUtil.readDataFromPropertyFile(propFileName,"Browser")); // 1 - Chrome, 2 - Edge, 3 - FF, 4 - Safari
 	public String sURL = PropertyFileUtil.readDataFromPropertyFile(propFileName,"URL");
+	public String excelFileName = "";
 	
 	@BeforeClass
 	public void invokeBrowser() {
@@ -51,5 +54,32 @@ public class BaseClass {
 		//driver.close();
 		driver.quit();
 	}
+	
+	@DataProvider(name = "ExcelData")
+	public Object[][] setExcelData() {
+		Object[][] values = null;
+		try {
+			values = DataProviderObject.getValue(excelFileName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return values;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

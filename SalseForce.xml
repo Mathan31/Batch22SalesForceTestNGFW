@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="SalseForceSuite">
-  <test thread-count="5" name="SalseForceTest">
+  <test thread-count="5" name="SalseForceTest" parallel="classes">
     <classes>
       <class name="testscenarios.TC01_Login"/>
       <class name="testscenarios.TC02_CreateLeads"/>
