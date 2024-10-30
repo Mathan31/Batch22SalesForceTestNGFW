@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import com.aventstack.extentreports.ExtentTest;
 
 import base.BaseClass;
+import libraries.SeleniumWrapper;
 
 public class MenuPage extends BaseClass{
 	
@@ -17,14 +18,16 @@ public class MenuPage extends BaseClass{
 	protected By salesLink = By.xpath("//span[@part='formatted-rich-text']/p[text()='Sales']");
 	protected By logoutLink = By.xpath("//a[text()='Log Out']");
 	protected By userImg=By.xpath("(//span[@class='uiImage']/parent::div[@data-aura-class='forceEntityIcon'])[1]");
-	private WebDriver driver;
+	private SeleniumWrapper oWrap;
 	
-	public MenuPage(WebDriver driver) {
+	public MenuPage(WebDriver driver,ExtentTest node) {
 		this.driver = driver;
+		this.node = node;
+		oWrap = new SeleniumWrapper(driver, node);
 	}
 	
 	public MenuPage clickOnAppLauncher() {
-		driver.findElement(applauncherIcon).click();
+		oWrap.click(driver.findElement(applauncherIcon), "App Launcher");
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -36,17 +39,12 @@ public class MenuPage extends BaseClass{
 	
 
 	public SalesPage clickOnSales() { 
-		Actions actions = new Actions(driver);
-		actions.moveToElement(driver.findElement(salesLink))
-			   .pause(Duration.ofSeconds(2))
-			   .click()
-			   .perform();
-		//driver.findElement(salesLink).click();
-		return new SalesPage(driver); 
+		oWrap.click(driver.findElement(salesLink), "Sales Link");
+		return new SalesPage(driver,node); 
 	}
 	
 	public MenuPage clickOnViewAll() {
-		driver.findElement(viewAllLink).click();
+		oWrap.click(driver.findElement(viewAllLink), "viewAll Link");
 		return this;
 	}
 	
@@ -57,7 +55,7 @@ public class MenuPage extends BaseClass{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		driver.findElement(userImg).click();
+		oWrap.click(driver.findElement(userImg), "User Image");
 		return this;
 	}
 	
@@ -68,8 +66,7 @@ public class MenuPage extends BaseClass{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		driver.findElement(logoutLink).click();
-		return new LoginPage(driver);
+		oWrap.click(driver.findElement(logoutLink), "Logout Link");
+		return new LoginPage(driver,node);
 	}
-
 }
