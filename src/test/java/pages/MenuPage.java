@@ -38,7 +38,8 @@ public class MenuPage extends BaseClass{
 	}
 	
 
-	public SalesPage clickOnSales() { 
+	public SalesPage clickOnSales() {
+		oWrap.moveToElement(driver.findElement(salesLink), "Sales Link");
 		oWrap.click(driver.findElement(salesLink), "Sales Link");
 		return new SalesPage(driver,node); 
 	}
